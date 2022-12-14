@@ -72,6 +72,10 @@ public class Enemy : MonoBehaviour, IDamageable
   {
     _hp -= damage;
 
-    if (_hp <= 0) Final();
+    if (_hp <= 0)
+    {
+      Final();
+      SpManager._instance.IncSp();
+    }
   }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CircleCollider2D))]
@@ -9,18 +10,11 @@ public class Enemy : MonoBehaviour, IDamageable
   private Rigidbody2D rb;
 
   [SerializeField]
-  private Shot _shot;
-  [SerializeField]
   private float _speed;
   [SerializeField]
   private int _hpMax;
   [SerializeField]
   private int _attack;
-
-  [SerializeField]
-  protected float _angleRange;
-  [SerializeField]
-  protected int _count;
 
   protected int _hp;
 
@@ -36,36 +30,42 @@ public class Enemy : MonoBehaviour, IDamageable
 
   }
 
-  public virtual void Shot(float angleBase, float angleRange, int count)
+  private void OnTriggerEnter2D(Collider2D other)
   {
-    var pos = transform.position;
-    var rot = transform.rotation;
-
-    if (1 < count)
+    if (other.TryGetComponent(out Player player))
     {
-      for (var i = 0; i < count; i++)
-      {
-        var angle = angleBase + angleRange * ((float)i / (count - 1) - 0.5f);
+      Final();
 
-        var shot = Instantiate(_shot, pos, rot);
-        shot.Init(_attack, angle);
-      }
-    }
-    else if (count == 1)
-    {
-      var shot = Instantiate(_shot, pos, rot);
-      shot.Init(_attack, angleBase);
+      player.Hit(_attack);
     }
   }
 
   public virtual void Init()
   {
+    if (rb == null) rb = GetComponent<Rigidbody2D>();
+
     _hp = _hpMax;
+
+    Move();
   }
 
   public virtual void Final()
   {
     Destroy(gameObject);
+  }
+
+  public virtual void Move()
+  {
+    var angle = Utils.GetAngle(
+        transform.localPosition,
+        Player._instance.transform.localPosition);
+    var dir = Utils.GetDirection(angle);
+
+    rb.velocity = dir * _speed;
+
+    var angles = transform.localEulerAngles;
+    angles.z = angle - 90;
+    transform.localEulerAngles = angles;
   }
 
   public virtual void Hit(int damage)

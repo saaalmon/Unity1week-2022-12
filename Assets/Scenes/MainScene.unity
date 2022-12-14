@@ -313,7 +313,8 @@ MonoBehaviour:
   _attack: 1
   _angleRange: 360
   _count: 10
-  _angleLimit: 0
+  _angleLimit: 10
+  _interval: 0.1
 --- !u!58 &546638601
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -364,96 +365,64 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hpMax: 5
---- !u!1001 &2934874894256921360
-PrefabInstance:
+--- !u!1 &703164454
+GameObject:
   m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2934874894423781797, guid: ac77fcdb0cd4341c8bcd557278f79b94, type: 3}
-      propertyPath: m_Name
-      value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 2934874894423781797, guid: ac77fcdb0cd4341c8bcd557278f79b94, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2934874894423781800, guid: ac77fcdb0cd4341c8bcd557278f79b94, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2934874894423781800, guid: ac77fcdb0cd4341c8bcd557278f79b94, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2934874894423781800, guid: ac77fcdb0cd4341c8bcd557278f79b94, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2934874894423781800, guid: ac77fcdb0cd4341c8bcd557278f79b94, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2934874894423781800, guid: ac77fcdb0cd4341c8bcd557278f79b94, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2934874894423781800, guid: ac77fcdb0cd4341c8bcd557278f79b94, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2934874894423781800, guid: ac77fcdb0cd4341c8bcd557278f79b94, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2934874894423781800, guid: ac77fcdb0cd4341c8bcd557278f79b94, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2934874894423781800, guid: ac77fcdb0cd4341c8bcd557278f79b94, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2934874894423781800, guid: ac77fcdb0cd4341c8bcd557278f79b94, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2934874894423781800, guid: ac77fcdb0cd4341c8bcd557278f79b94, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7441567846062727256, guid: ac77fcdb0cd4341c8bcd557278f79b94, type: 3}
-      propertyPath: _shot
-      value: 
-      objectReference: {fileID: -3018353231979074738, guid: 4938a934a7ed948b6b1883ed66a83aa5, type: 3}
-    - target: {fileID: 7441567846062727256, guid: ac77fcdb0cd4341c8bcd557278f79b94, type: 3}
-      propertyPath: _count
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7441567846062727256, guid: ac77fcdb0cd4341c8bcd557278f79b94, type: 3}
-      propertyPath: _hpMax
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7441567846062727256, guid: ac77fcdb0cd4341c8bcd557278f79b94, type: 3}
-      propertyPath: _speed
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7441567846062727256, guid: ac77fcdb0cd4341c8bcd557278f79b94, type: 3}
-      propertyPath: _attack
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7441567846062727256, guid: ac77fcdb0cd4341c8bcd557278f79b94, type: 3}
-      propertyPath: _interval
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 7441567846062727256, guid: ac77fcdb0cd4341c8bcd557278f79b94, type: 3}
-      propertyPath: _shotGene
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7441567846062727256, guid: ac77fcdb0cd4341c8bcd557278f79b94, type: 3}
-      propertyPath: _angleRange
-      value: 360
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ac77fcdb0cd4341c8bcd557278f79b94, type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 703164455}
+  - component: {fileID: 703164457}
+  - component: {fileID: 703164456}
+  m_Layer: 0
+  m_Name: EnemyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &703164455
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703164454}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &703164456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703164454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 159954d1e993744278be35120f577d13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemy: {fileID: 7441567846062727256, guid: ac77fcdb0cd4341c8bcd557278f79b94, type: 3}
+  _interval: 0.5
+  _range: {x: 10, y: 10}
+--- !u!114 &703164457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703164454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b96fc8f829b0e4dceb337e4dbd18c94b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentName: Enemies

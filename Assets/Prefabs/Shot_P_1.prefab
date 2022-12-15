@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7652901581332945882}
   - component: {fileID: 7652901581332945885}
   m_Layer: 0
-  m_Name: Shot_P
+  m_Name: Shot_P_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,8 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: -1762698013
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: c27448f9d85fd41ff946d738ed02001d, type: 3}
-  m_Color: {r: 1, g: 0.6084906, b: 0.6084906, a: 1}
+  m_Sprite: {fileID: 8101964803167241136, guid: cb1f8c06719c34583ae052ba278f90a6, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -136,4 +136,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bb08340056a64324b0da112a97c2a4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 15
+  _speed: 8

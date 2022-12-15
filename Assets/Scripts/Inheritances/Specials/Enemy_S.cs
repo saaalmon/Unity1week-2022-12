@@ -20,7 +20,7 @@ public class Enemy_S : Enemy
   {
     base.Init();
 
-    Destroy(gameObject, 3.0f);
+    Destroy(gameObject, 4.5f);
   }
 
   public override void Final()

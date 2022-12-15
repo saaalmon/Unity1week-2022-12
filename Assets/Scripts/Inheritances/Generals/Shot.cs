@@ -31,9 +31,9 @@ public class Shot : MonoBehaviour
 
     _attack = attack;
 
-    var angles = transform.localEulerAngles;
-    angles.z = angle - 90;
-    transform.localEulerAngles = angles;
+    // var angles = transform.localEulerAngles;
+    // angles.z = angle - 90;
+    // transform.localEulerAngles = angles;
 
     var dir = Utils.GetDirection(angle);
 

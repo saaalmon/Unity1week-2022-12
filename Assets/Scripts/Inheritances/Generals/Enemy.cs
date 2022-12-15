@@ -8,6 +8,8 @@ using DG.Tweening;
 public class Enemy : MonoBehaviour, IDamageable
 {
   private Rigidbody2D rb;
+  private CircleCollider2D cor;
+  private Animator anim;
 
   [SerializeField]
   private float _speed;
@@ -17,6 +19,8 @@ public class Enemy : MonoBehaviour, IDamageable
   private int _attack;
 
   protected int _hp;
+
+  private Sequence _seq;
 
   // Start is called before the first frame update
   void Start()
@@ -43,6 +47,8 @@ public class Enemy : MonoBehaviour, IDamageable
   public virtual void Init()
   {
     if (rb == null) rb = GetComponent<Rigidbody2D>();
+    if (cor == null) cor = GetComponent<CircleCollider2D>();
+    if (anim == null) anim = GetComponent<Animator>();
 
     _hp = _hpMax;
 
@@ -51,6 +57,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
   public virtual void Final()
   {
+    _seq.Kill();
+
     Destroy(gameObject);
   }
 
@@ -63,9 +71,9 @@ public class Enemy : MonoBehaviour, IDamageable
 
     rb.velocity = dir * _speed;
 
-    var angles = transform.localEulerAngles;
-    angles.z = angle - 90;
-    transform.localEulerAngles = angles;
+    // var angles = transform.localEulerAngles;
+    // angles.z = angle - 90;
+    // transform.localEulerAngles = angles;
   }
 
   public virtual void Hit(int damage)
@@ -74,8 +82,23 @@ public class Enemy : MonoBehaviour, IDamageable
 
     if (_hp <= 0)
     {
-      Final();
+      cor.enabled = false;
+      anim.SetBool("isPacked", true);
+
       SpManager._instance.IncSp();
+
+      _seq = DOTween.Sequence()
+      .Append(transform.DOMoveY(0.5f, 0.2f).SetLoops(2, LoopType.Yoyo).SetRelative())
+      .AppendCallback(() => Final())
+      .SetAutoKill()
+      .Play();
+    }
+    else
+    {
+      _seq = DOTween.Sequence()
+      .Append(transform.DOScale(1.4f, 0.05f).SetLoops(2, LoopType.Yoyo))
+      .SetAutoKill()
+      .Play();
     }
   }
 }

@@ -30,10 +30,10 @@ public class Shot_E : Shot
   {
     base.OnTriggerEnter2D(other);
 
-    if (other.TryGetComponent(out Player player))
+    if (other.TryGetComponent(out Enemy enemy))
     {
       Final();
-      player.Hit(_attack);
+      enemy.Hit(_attack);
     }
   }
 }

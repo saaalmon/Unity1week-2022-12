@@ -9,6 +9,7 @@ using System;
 public class Player : MonoBehaviour, IDamageable
 {
   private Rigidbody2D rb;
+  private SpriteRenderer sprite;
   private Camera _mainCamera;
 
   public static Player _instance;
@@ -16,7 +17,7 @@ public class Player : MonoBehaviour, IDamageable
   [SerializeField]
   private HpManager _hpMana;
   [SerializeField]
-  private Shot _shot;
+  private Shot[] _shots;
   [SerializeField]
   private float _speed;
   [SerializeField]
@@ -55,6 +56,7 @@ public class Player : MonoBehaviour, IDamageable
   public void Init()
   {
     if (rb == null) rb = GetComponent<Rigidbody2D>();
+    if (sprite == null) sprite = GetComponent<SpriteRenderer>();
     if (_mainCamera == null) _mainCamera = Camera.main;
 
     _cor = StartCoroutine(ShotRepeat());
@@ -82,9 +84,12 @@ public class Player : MonoBehaviour, IDamageable
     var dir = Input.mousePosition - screenPos;
     _angle = Utils.GetAngle(Vector3.zero, dir);
 
-    var angles = transform.localEulerAngles;
-    angles.z = _angle - 90;
-    transform.localEulerAngles = angles;
+    if (Mathf.Abs(_angle) > 90f) sprite.flipX = false;
+    if (Mathf.Abs(_angle) < 90f) sprite.flipX = true;
+
+    // var angles = transform.localEulerAngles;
+    // angles.z = _angle - 90;
+    // transform.localEulerAngles = angles;
   }
 
   private void Shot(float angleBase, float angleRange, int count)
@@ -98,7 +103,8 @@ public class Player : MonoBehaviour, IDamageable
       {
         var angle = angleBase + angleRange * ((float)i / (count - 1) - 0.5f);
 
-        var shot = Instantiate(_shot, pos, rot);
+        var rand = UnityEngine.Random.Range(0, _shots.Length);
+        var shot = Instantiate(_shots[rand], pos, rot);
         shot.Init(_attack, angle);
       }
     }
@@ -106,7 +112,9 @@ public class Player : MonoBehaviour, IDamageable
     {
       var angle = angleBase + UnityEngine.Random.Range(-_angleLimit, _angleLimit);
 
-      var shot = Instantiate(_shot, pos, rot);
+
+      var rand = UnityEngine.Random.Range(0, _shots.Length);
+      var shot = Instantiate(_shots[rand], pos, rot);
       shot.Init(_attack, angle);
     }
 

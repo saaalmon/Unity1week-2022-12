@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Cinemachine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CircleCollider2D))]
@@ -10,6 +11,11 @@ public class Enemy : MonoBehaviour, IDamageable
   private Rigidbody2D rb;
   private CircleCollider2D cor;
   private Animator anim;
+
+  [SerializeField]
+  private CinemachineImpulseSource _HitImpulse;
+  [SerializeField]
+  private CinemachineImpulseSource _DeadImpulse;
 
   [SerializeField]
   private float _speed;
@@ -59,6 +65,8 @@ public class Enemy : MonoBehaviour, IDamageable
   {
     _seq.Kill();
 
+    _DeadImpulse.GenerateImpulse();
+
     Destroy(gameObject);
   }
 
@@ -97,8 +105,11 @@ public class Enemy : MonoBehaviour, IDamageable
     {
       _seq = DOTween.Sequence()
       .Append(transform.DOScale(1.4f, 0.05f).SetLoops(2, LoopType.Yoyo))
+      .OnComplete(() => transform.localScale = Vector3.one)
       .SetAutoKill()
       .Play();
+
+      _HitImpulse.GenerateImpulse();
     }
   }
 }

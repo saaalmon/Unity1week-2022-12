@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
 
 public partial class GameManager : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public partial class GameManager : MonoBehaviour
   //Managers
   [SerializeField]
   private Player _player;
+  [SerializeField]
+  private EnemyManager _enemyMana;
   [SerializeField]
   private TimerManager _timerMana;
   [SerializeField]
@@ -53,6 +56,21 @@ public partial class GameManager : MonoBehaviour
   {
     return currentState;
   }
+
+  public void ChengeTitleState()
+  {
+    ChangeCurrentState(stateTitle);
+  }
+
+  public void ChengeGameState()
+  {
+    ChangeCurrentState(stateGame);
+  }
+
+  public void ChengeResultState()
+  {
+    ChangeCurrentState(stateResult);
+  }
 }
 public partial class GameManager
 {
@@ -67,7 +85,7 @@ public partial class GameManager
       //仮スクリプト
       owner._player.gameObject.SetActive(false);
 
-      owner.ChangeCurrentState(stateGame);
+      //owner.ChangeCurrentState(stateGame);
     }
 
     public override void OnUpdate(GameManager owner)
@@ -91,9 +109,18 @@ public partial class GameManager
 
       //仮スクリプト
       owner._player.gameObject.SetActive(true);
+      owner._player.Init();
 
+      owner._enemyMana.StartGenerate();
       owner._timerMana.SetTimer();
       owner._spMana.SetSp();
+
+      owner._timerMana.Timer
+      .Subscribe(x =>
+      {
+        if (x <= 0) owner.ChengeResultState();
+      })
+      .AddTo(owner);
     }
 
     public override void OnUpdate(GameManager owner)
@@ -107,6 +134,8 @@ public partial class GameManager
     public override void OnExit(GameManager owner, GameStateBase nextState)
     {
       owner._gameCanvas.gameObject.SetActive(false);
+
+      owner._enemyMana.StopGenerate();
     }
   }
 

@@ -21,16 +21,28 @@ public class EnemyManager : MonoBehaviour
   [SerializeField]
   private Vector2 _range;
 
+  private Coroutine _cor;
+
   // Start is called before the first frame update
   void Start()
   {
-    StartCoroutine(EnemyGenerate());
+    //StartCoroutine(EnemyGenerate());
   }
 
   // Update is called once per frame
   void Update()
   {
 
+  }
+
+  public void StartGenerate()
+  {
+    _cor = StartCoroutine(EnemyGenerate());
+  }
+
+  public void StopGenerate()
+  {
+    StopCoroutine(_cor);
   }
 
   private IEnumerator EnemyGenerate()

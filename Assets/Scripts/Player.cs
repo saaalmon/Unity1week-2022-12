@@ -17,6 +17,8 @@ public class Player : MonoBehaviour, IDamageable
   [SerializeField]
   private HpManager _hpMana;
   [SerializeField]
+  private Shot _spShot;
+  [SerializeField]
   private Shot[] _shots;
   [SerializeField]
   private float _speed;
@@ -35,7 +37,6 @@ public class Player : MonoBehaviour, IDamageable
 
   private float _angle;
   private Coroutine _cor;
-
   void Awake()
   {
     _instance = this;
@@ -44,7 +45,7 @@ public class Player : MonoBehaviour, IDamageable
   // Start is called before the first frame update
   void Start()
   {
-    Init();
+    //Init();
   }
 
   // Update is called once per frame
@@ -92,7 +93,7 @@ public class Player : MonoBehaviour, IDamageable
     // transform.localEulerAngles = angles;
   }
 
-  private void Shot(float angleBase, float angleRange, int count)
+  private void Shot(Shot shot, float angleBase, float angleRange, int count)
   {
     var pos = transform.position;
     var rot = transform.rotation;
@@ -103,19 +104,16 @@ public class Player : MonoBehaviour, IDamageable
       {
         var angle = angleBase + angleRange * ((float)i / (count - 1) - 0.5f);
 
-        var rand = UnityEngine.Random.Range(0, _shots.Length);
-        var shot = Instantiate(_shots[rand], pos, rot);
-        shot.Init(_attack, angle);
+        var pre = Instantiate(shot, pos, rot);
+        pre.Init(_attack, angle);
       }
     }
     else if (count == 1)
     {
       var angle = angleBase + UnityEngine.Random.Range(-_angleLimit, _angleLimit);
 
-
-      var rand = UnityEngine.Random.Range(0, _shots.Length);
-      var shot = Instantiate(_shots[rand], pos, rot);
-      shot.Init(_attack, angle);
+      var pre = Instantiate(shot, pos, rot);
+      pre.Init(_attack, angle);
     }
 
     // var shot = _gene.Generate(_shot.gameObject);
@@ -124,7 +122,7 @@ public class Player : MonoBehaviour, IDamageable
 
   private void Blast()
   {
-    Shot(_angle, _angleRange, _count);
+    Shot(_spShot, _angle, _angleRange, _count);
   }
 
   async public void Hit(int damage)
@@ -148,13 +146,14 @@ public class Player : MonoBehaviour, IDamageable
     {
       yield return new WaitForSeconds(_interval);
 
-      Shot(_angle, _angleRange, 1);
+      var rand = UnityEngine.Random.Range(0, _shots.Length);
+      Shot(_shots[rand], _angle, _angleRange, 1);
     }
   }
 
   async UniTask Restart()
   {
-    await UniTask.Delay(TimeSpan.FromSeconds(2.0f));
+    await UniTask.Delay(TimeSpan.FromSeconds(1.0f));
 
     gameObject.SetActive(true);
     Blast();

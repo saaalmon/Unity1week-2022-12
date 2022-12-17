@@ -13,6 +13,8 @@ public class SpManager : MonoBehaviour
   [SerializeField]
   private int _spMax;
 
+  private int _count;
+
   // Start is called before the first frame update
   void Start()
   {
@@ -27,11 +29,13 @@ public class SpManager : MonoBehaviour
 
   public void SetSp()
   {
+    _count = 0;
     _sp.Value = 0;
   }
 
   public bool IncSp()
   {
+    _count++;
     var incSp = _sp.Value + 1;
 
     if (incSp >= _spMax) _sp.Value = _spMax;

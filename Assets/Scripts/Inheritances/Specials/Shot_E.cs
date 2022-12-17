@@ -32,8 +32,7 @@ public class Shot_E : Shot
 
     if (other.TryGetComponent(out Enemy enemy))
     {
-      Final();
-      enemy.Hit(_attack);
+      enemy.Hit(_attack * 2);
     }
   }
 }

@@ -17,6 +17,8 @@ public class GamePresenter : MonoBehaviour
 
   //View
   [SerializeField]
+  private Image _removePanel;
+  [SerializeField]
   private TextMeshProUGUI _timerText;
   [SerializeField]
   private Image _spGauge;
@@ -24,6 +26,13 @@ public class GamePresenter : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
+    _hpMana.Hp.Subscribe(x =>
+    {
+      if (x <= 0) _removePanel.gameObject.SetActive(true);
+      else _removePanel.gameObject.SetActive(false);
+    })
+    .AddTo(this);
+
     _timerMana.Timer.Subscribe(x =>
     {
       _timerText.text = x.ToString("F2");

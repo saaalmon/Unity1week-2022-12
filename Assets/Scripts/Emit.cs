@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
-using UnityEngine.UI;
+using KanKikuchi.AudioManager;
 
 public class Emit : MonoBehaviour
 {
@@ -31,6 +31,7 @@ public class Emit : MonoBehaviour
     var seq = DOTween.Sequence()
     .AppendCallback(() => _resultScoreText.text = "0")
     .Append(_resultScoreText.DOCounter(0, score, 1.5f))
+    .AppendCallback(() => SoundManager.PlaySE(SEPath.SCORE))
     .Append(_resultScoreText.DOScale(1.5f, 0.2f).SetLoops(2, LoopType.Yoyo))
     .Play();
   }

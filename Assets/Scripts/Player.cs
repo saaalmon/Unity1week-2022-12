@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System;
+using KanKikuchi.AudioManager;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CircleCollider2D))]
@@ -13,6 +14,9 @@ public class Player : MonoBehaviour, IDamageable
   private Camera _mainCamera;
 
   public static Player _instance;
+
+  [SerializeField]
+  private ParticleSystem _destroyParticle;
 
   [SerializeField]
   private HpManager _hpMana;
@@ -65,6 +69,8 @@ public class Player : MonoBehaviour, IDamageable
 
   private void Final()
   {
+    Instantiate(_destroyParticle, transform.position, Quaternion.identity);
+
     gameObject.SetActive(false);
     StopCoroutine(_cor);
   }
@@ -96,6 +102,8 @@ public class Player : MonoBehaviour, IDamageable
     var pos = transform.position;
     var rot = transform.rotation;
 
+    //SoundManager.PlaySE(SEPath.SHOT);
+
     if (1 < count)
     {
       for (var i = 0; i < count; i++)
@@ -120,6 +128,8 @@ public class Player : MonoBehaviour, IDamageable
 
   private void Blast()
   {
+    SoundManager.PlaySE(SEPath.SHOT);
+
     Shot(_spShot, _angle, _angleRange, _count);
   }
 
@@ -131,6 +141,8 @@ public class Player : MonoBehaviour, IDamageable
 
     if (judgeHp)
     {
+      SoundManager.PlaySE(SEPath.DESTROY);
+
       Final();
 
       await Restart();

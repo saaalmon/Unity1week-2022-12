@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
+using KanKikuchi.AudioManager;
 
 public class SpManager : MonoBehaviour
 {
@@ -60,6 +61,8 @@ public class SpManager : MonoBehaviour
     {
       _sp.Value = 0;
       _level++;
+
+      SoundManager.PlaySE(SEPath.LEVEL_UP);
 
       var ratio = (float)_level / _levelMax;
       var spLimit = Mathf.Lerp(_spMin, _spMax, (float)_level / _levelMax);

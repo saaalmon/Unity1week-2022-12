@@ -980,6 +980,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4818601441304a198edb489de3ba4a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _destroyParticle: {fileID: 4979722236833433261, guid: d1a346668948245aa92aa0c28c57f58e, type: 3}
   _hpMana: {fileID: 278941122}
   _spShot: {fileID: 2314621584520377975, guid: 47f99d304f4034b3aa4117f59cf0ed68, type: 3}
   _shots:
@@ -1107,7 +1108,7 @@ Animator:
   m_GameObject: {fileID: 278941121}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 221c39e1ec95240a686a99ab71968c1f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -4505,7 +4506,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Open
+  m_text: Record
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7d48f49bae18640b0aeb93dc4e889506, type: 2}
   m_sharedMaterial: {fileID: 7102600953222260580, guid: 7d48f49bae18640b0aeb93dc4e889506, type: 2}
@@ -4945,7 +4946,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Scene
+  m_text: Restart
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7d48f49bae18640b0aeb93dc4e889506, type: 2}
   m_sharedMaterial: {fileID: 7102600953222260580, guid: 7d48f49bae18640b0aeb93dc4e889506, type: 2}

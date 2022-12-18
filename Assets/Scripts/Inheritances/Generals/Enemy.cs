@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Cinemachine;
+using KanKikuchi.AudioManager;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CircleCollider2D))]
@@ -68,6 +69,8 @@ public class Enemy : MonoBehaviour, IDamageable
   {
     _seq.Kill();
 
+    SoundManager.PlaySE(SEPath.DESTROY);
+
     _DeadImpulse.GenerateImpulse();
     Instantiate(_destroyParticle, transform.position, Quaternion.identity);
 
@@ -91,6 +94,8 @@ public class Enemy : MonoBehaviour, IDamageable
   public virtual void Hit(int damage)
   {
     _hp -= damage;
+
+    SoundManager.PlaySE(SEPath.HIT);
 
     if (_hp <= 0)
     {

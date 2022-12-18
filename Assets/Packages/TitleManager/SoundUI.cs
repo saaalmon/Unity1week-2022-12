@@ -38,6 +38,8 @@ public class SoundUI : MonoBehaviour
   {
     //SoundPanel.gameObject.SetActive(true);
 
+    SoundManager.PlaySE(SEPath.DECIDE);
+
     var seq = DOTween.Sequence()
        .AppendCallback(() => SoundPanel.gameObject.SetActive(true))
        .AppendCallback(() => SoundPanel.transform.localScale = Vector3.zero)
@@ -51,6 +53,8 @@ public class SoundUI : MonoBehaviour
   public void CloseUI()
   {
     //SoundPanel.gameObject.SetActive(false);
+
+    SoundManager.PlaySE(SEPath.BACK);
 
     var seq = DOTween.Sequence()
        .Append(SoundPanel.transform.DOScale(Vector3.zero, 0.2f))

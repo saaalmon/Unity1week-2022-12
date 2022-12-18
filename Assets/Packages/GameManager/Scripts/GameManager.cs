@@ -5,6 +5,7 @@ using UniRx;
 using UnityEngine.Playables;
 using Cysharp.Threading.Tasks;
 using System;
+using KanKikuchi.AudioManager;
 
 public partial class GameManager : MonoBehaviour
 {
@@ -44,6 +45,8 @@ public partial class GameManager : MonoBehaviour
   {
     _instance = this;
 
+    SoundManager.PlayBGM(BGMPath.TITLE);
+
     _titleCanvas.gameObject.SetActive(false);
     _gameCanvas.gameObject.SetActive(false);
     _resultCanvas.gameObject.SetActive(false);
@@ -69,16 +72,31 @@ public partial class GameManager : MonoBehaviour
 
   public void ChengeTitleState()
   {
+    SoundManager.StopBGM();
+    SoundManager.PlayBGM(BGMPath.TITLE);
+
+    SoundManager.PlaySE(SEPath.DECIDE);
+
     ChangeCurrentState(stateTitle);
   }
 
   public void ChengeGameState()
   {
+    SoundManager.StopBGM();
+    SoundManager.PlayBGM(BGMPath.GAME);
+
+    SoundManager.PlaySE(SEPath.START);
+
     ChangeCurrentState(stateGame);
   }
 
   public void ChengeResultState()
   {
+    SoundManager.StopBGM();
+    SoundManager.PlaySE(SEPath.FINISH);
+
+    SoundManager.PlaySE(SEPath.RESULT);
+
     ChangeCurrentState(stateResult);
   }
 

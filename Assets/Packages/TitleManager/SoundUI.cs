@@ -46,8 +46,8 @@ public class SoundUI : MonoBehaviour
        .Append(SoundPanel.transform.DOScale(Vector3.one, 0.2f))
        .Play();
 
-    bgmSlider.value = m_bgmVol;
-    seSlider.value = m_seVol;
+    m_bgmVol = bgmSlider.value;
+    m_seVol = seSlider.value;
   }
 
   public void CloseUI()

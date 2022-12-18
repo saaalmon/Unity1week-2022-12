@@ -42,6 +42,16 @@ public class EnemyManager : MonoBehaviour
     _interval = interval;
   }
 
+  public void ClearEnemy()
+  {
+    var enemies = GameObject.FindObjectsOfType<Enemy>();
+
+    for (var i = 0; i < enemies.Length; i++)
+    {
+      enemies[i].Final();
+    }
+  }
+
   public void StartGenerate()
   {
     _cor = StartCoroutine(EnemyGenerate());

@@ -100,6 +100,11 @@ public partial class GameManager : MonoBehaviour
     ChangeCurrentState(stateResult);
   }
 
+  public void SetRanking()
+  {
+    naichilab.RankingLoader.Instance.SendScoreAndShowRanking(_spMana._count);
+  }
+
   async UniTask TimelinePlay(PlayableDirector timeline)
   {
     timeline.Play();
@@ -181,6 +186,7 @@ public partial class GameManager
       owner._gameCanvas.gameObject.SetActive(false);
 
       owner._enemyMana.StopGenerate();
+      owner._enemyMana.ClearEnemy();
     }
   }
 

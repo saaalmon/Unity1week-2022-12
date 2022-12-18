@@ -60,8 +60,6 @@ public class Player : MonoBehaviour, IDamageable
     if (sprite == null) sprite = GetComponent<SpriteRenderer>();
     if (_mainCamera == null) _mainCamera = Camera.main;
 
-    _cor = StartCoroutine(ShotRepeat());
-
     _hpMana.SetHp();
   }
 
@@ -134,10 +132,15 @@ public class Player : MonoBehaviour, IDamageable
     if (judgeHp)
     {
       Final();
+
       await Restart();
     }
   }
 
+  public void StartShot()
+  {
+    _cor = StartCoroutine(ShotRepeat());
+  }
 
   //仮スクリプト
   private IEnumerator ShotRepeat()
@@ -158,5 +161,6 @@ public class Player : MonoBehaviour, IDamageable
     gameObject.SetActive(true);
     Blast();
     Init();
+    StartShot();
   }
 }

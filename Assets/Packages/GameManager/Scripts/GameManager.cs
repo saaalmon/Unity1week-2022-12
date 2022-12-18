@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using UnityEngine.Playables;
+using Cysharp.Threading.Tasks;
+using System;
 
 public partial class GameManager : MonoBehaviour
 {
@@ -80,15 +82,13 @@ public partial class GameManager : MonoBehaviour
     ChangeCurrentState(stateResult);
   }
 
-  public IEnumerator TimelinePlay(PlayableDirector timeline)
+  async UniTask TimelinePlay(PlayableDirector timeline)
   {
     timeline.Play();
 
     Debug.Log(timeline.duration);
 
-    yield return new WaitForSeconds((float)timeline.duration);
-
-    Debug.Log("timeline Completed!");
+    await UniTask.Delay(TimeSpan.FromSeconds(timeline.duration));
   }
 }
 
@@ -96,18 +96,18 @@ public partial class GameManager
 {
   public class StateTitle : GameStateBase
   {
-    public override void OnEnter(GameManager owner, GameStateBase prevState)
+    async public override void OnEnter(GameManager owner, GameStateBase prevState)
     {
       Debug.Log("Title");
 
       owner._titleCanvas.gameObject.SetActive(true);
 
       //仮スクリプト
-      owner.StartCoroutine(owner.TimelinePlay(owner._titleInit));
-
       owner._player.gameObject.SetActive(false);
 
-      //owner.ChangeCurrentState(stateGame);
+      await owner.TimelinePlay(owner._titleInit);
+
+      Debug.Log("timeline Completed!");
     }
 
     public override void OnUpdate(GameManager owner)
@@ -123,21 +123,20 @@ public partial class GameManager
 
   public class StateGame : GameStateBase
   {
-    public override void OnEnter(GameManager owner, GameStateBase prevState)
+    async public override void OnEnter(GameManager owner, GameStateBase prevState)
     {
       Debug.Log("Game");
 
       owner._gameCanvas.gameObject.SetActive(true);
 
       //仮スクリプト
-      owner.StartCoroutine(owner.TimelinePlay(owner._gameInit));
-
+      owner._timerMana.SetTimer();
+      owner._spMana.SetSp();
       owner._player.gameObject.SetActive(true);
       owner._player.Init();
 
+      owner._player.StartShot();
       owner._enemyMana.StartGenerate();
-      owner._timerMana.SetTimer();
-      owner._spMana.SetSp();
 
       owner._timerMana.Timer
       .Subscribe(x =>
@@ -145,6 +144,10 @@ public partial class GameManager
         if (x <= 0) owner.ChengeResultState();
       })
       .AddTo(owner);
+
+      await owner.TimelinePlay(owner._gameInit);
+
+      Debug.Log("timeline Completed!");
     }
 
     public override void OnUpdate(GameManager owner)
@@ -165,16 +168,16 @@ public partial class GameManager
 
   public class StateResult : GameStateBase
   {
-    public override void OnEnter(GameManager owner, GameStateBase prevState)
+    async public override void OnEnter(GameManager owner, GameStateBase prevState)
     {
       Debug.Log("Result");
 
       owner._resultCanvas.gameObject.SetActive(true);
 
-      //仮スクリプト
-      owner.StartCoroutine(owner.TimelinePlay(owner._resultInit));
-
       owner._player.gameObject.SetActive(false);
+
+      //仮スクリプト
+      await owner.TimelinePlay(owner._resultInit);
     }
 
     public override void OnUpdate(GameManager owner)

@@ -29,18 +29,173 @@ ScriptedImporter:
   colabOptions:
     exportToFile: 0
     exportDirectory: Sprites/{filename}
-  animationOptions: []
+  animationOptions:
+  - tagName: Idle
+    animationOptions:
+      relativePath: 
+      componentType: 0
+      overrideDirection: 0
+      direction: 0
+      loopTime: 1
+      useCustomCurve: 0
+      customCurve:
+        serializedVersion: 2
+        curve: []
+        preInfinity: 2
+        postInfinity: 2
+        rotationOrder: 4
+  - tagName: Dead
+    animationOptions:
+      relativePath: 
+      componentType: 0
+      overrideDirection: 0
+      direction: 0
+      loopTime: 0
+      useCustomCurve: 0
+      customCurve:
+        serializedVersion: 2
+        curve: []
+        preInfinity: 2
+        postInfinity: 2
+        rotationOrder: 4
   sheetData:
-    frames: []
+    frames:
+    - filename: Player_Idle_frame1
+      frame:
+        x: 0
+        y: 0
+        w: 16
+        h: 32
+      rotated: 0
+      trimmed: 0
+      spriteSourceSize:
+        x: 0
+        y: 0
+        w: 16
+        h: 32
+      sourceSize:
+        w: 16
+        h: 32
+      duration: 120
+    - filename: Player_Idle_frame2
+      frame:
+        x: 16
+        y: 0
+        w: 16
+        h: 32
+      rotated: 0
+      trimmed: 0
+      spriteSourceSize:
+        x: 0
+        y: 0
+        w: 16
+        h: 32
+      sourceSize:
+        w: 16
+        h: 32
+      duration: 120
+    - filename: Player_Idle_frame3
+      frame:
+        x: 32
+        y: 0
+        w: 16
+        h: 32
+      rotated: 0
+      trimmed: 0
+      spriteSourceSize:
+        x: 0
+        y: 0
+        w: 16
+        h: 32
+      sourceSize:
+        w: 16
+        h: 32
+      duration: 120
+    - filename: Player_Idle_frame4
+      frame:
+        x: 48
+        y: 0
+        w: 16
+        h: 32
+      rotated: 0
+      trimmed: 0
+      spriteSourceSize:
+        x: 0
+        y: 0
+        w: 16
+        h: 32
+      sourceSize:
+        w: 16
+        h: 32
+      duration: 120
+    - filename: Player_Idle_frame5
+      frame:
+        x: 64
+        y: 0
+        w: 16
+        h: 32
+      rotated: 0
+      trimmed: 0
+      spriteSourceSize:
+        x: 0
+        y: 0
+        w: 16
+        h: 32
+      sourceSize:
+        w: 16
+        h: 32
+      duration: 120
+    - filename: Player_Idle_frame6
+      frame:
+        x: 80
+        y: 0
+        w: 16
+        h: 32
+      rotated: 0
+      trimmed: 0
+      spriteSourceSize:
+        x: 0
+        y: 0
+        w: 16
+        h: 32
+      sourceSize:
+        w: 16
+        h: 32
+      duration: 120
+    - filename: Player_Dead_frame1
+      frame:
+        x: 96
+        y: 0
+        w: 16
+        h: 32
+      rotated: 0
+      trimmed: 0
+      spriteSourceSize:
+        x: 0
+        y: 0
+        w: 16
+        h: 32
+      sourceSize:
+        w: 16
+        h: 32
+      duration: 100
     meta:
-      version: 
-      image: 
-      format: 
+      version: 1.2.40-arm64
+      image: Player_sheet.png
+      format: RGBA8888
       size:
-        w: 0
-        h: 0
-      scale: 0
-      frameTags: []
+        w: 112
+        h: 32
+      scale: 1
+      frameTags:
+      - name: Idle
+        from: 0
+        to: 5
+        direction: forward
+      - name: Dead
+        from: 6
+        to: 6
+        direction: forward
       slices: []
-    pathToSheetData: 
-    aseFileName: 
+    pathToSheetData: Temp/UnityTempFile-46e7f27b1bdf048ad978e1f031fa970c/asetempexports/Player_data.json
+    aseFileName: Assets/Sprites/Player.aseprite

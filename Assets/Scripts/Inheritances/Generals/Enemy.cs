@@ -18,6 +18,9 @@ public class Enemy : MonoBehaviour, IDamageable
   private CinemachineImpulseSource _DeadImpulse;
 
   [SerializeField]
+  private ParticleSystem _destroyParticle;
+
+  [SerializeField]
   private float _speed;
   [SerializeField]
   private int _hpMax;
@@ -66,6 +69,7 @@ public class Enemy : MonoBehaviour, IDamageable
     _seq.Kill();
 
     _DeadImpulse.GenerateImpulse();
+    Instantiate(_destroyParticle, transform.position, Quaternion.identity);
 
     Destroy(gameObject);
   }

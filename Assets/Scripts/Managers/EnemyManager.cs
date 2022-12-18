@@ -14,13 +14,15 @@ public enum RESPAWN_TYPE
 public class EnemyManager : MonoBehaviour
 {
   [SerializeField]
+  private SpManager _spMana;
+
+  [SerializeField]
   private Enemy _enemy;
 
   [SerializeField]
-  private float _interval;
-  [SerializeField]
   private Vector2 _range;
 
+  private float _interval;
   private Coroutine _cor;
 
   // Start is called before the first frame update
@@ -33,6 +35,11 @@ public class EnemyManager : MonoBehaviour
   void Update()
   {
 
+  }
+
+  public void SetInterval(float interval)
+  {
+    _interval = interval;
   }
 
   public void StartGenerate()

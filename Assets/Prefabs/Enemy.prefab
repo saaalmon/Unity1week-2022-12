@@ -141,6 +141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _HitImpulse: {fileID: 2894859767729957527}
   _DeadImpulse: {fileID: 8326323377180029604}
+  _destroyParticle: {fileID: 4979722236833433261, guid: d1a346668948245aa92aa0c28c57f58e, type: 3}
   _speed: 3
   _hpMax: 3
   _attack: 1

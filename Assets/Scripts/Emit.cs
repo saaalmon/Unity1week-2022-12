@@ -26,7 +26,7 @@ public class Emit : MonoBehaviour
 
   public void ScoreCount()
   {
-    var score = _spMana.Sp.Value;
+    var score = _spMana._count;
 
     var seq = DOTween.Sequence()
     .AppendCallback(() => _resultScoreText.text = "0")

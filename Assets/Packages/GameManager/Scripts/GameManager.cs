@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
+using UnityEngine.Playables;
 
 public partial class GameManager : MonoBehaviour
 {
@@ -17,6 +18,13 @@ public partial class GameManager : MonoBehaviour
   private CanvasGroup _gameCanvas;
   [SerializeField]
   private CanvasGroup _resultCanvas;
+
+  [SerializeField]
+  private PlayableDirector _titleInit;
+  [SerializeField]
+  private PlayableDirector _gameInit;
+  [SerializeField]
+  private PlayableDirector _resultInit;
 
   public static GameManager _instance;
 
@@ -71,7 +79,19 @@ public partial class GameManager : MonoBehaviour
   {
     ChangeCurrentState(stateResult);
   }
+
+  public IEnumerator TimelinePlay(PlayableDirector timeline)
+  {
+    timeline.Play();
+
+    Debug.Log(timeline.duration);
+
+    yield return new WaitForSeconds((float)timeline.duration);
+
+    Debug.Log("timeline Completed!");
+  }
 }
+
 public partial class GameManager
 {
   public class StateTitle : GameStateBase
@@ -83,6 +103,8 @@ public partial class GameManager
       owner._titleCanvas.gameObject.SetActive(true);
 
       //仮スクリプト
+      owner.StartCoroutine(owner.TimelinePlay(owner._titleInit));
+
       owner._player.gameObject.SetActive(false);
 
       //owner.ChangeCurrentState(stateGame);
@@ -108,6 +130,8 @@ public partial class GameManager
       owner._gameCanvas.gameObject.SetActive(true);
 
       //仮スクリプト
+      owner.StartCoroutine(owner.TimelinePlay(owner._gameInit));
+
       owner._player.gameObject.SetActive(true);
       owner._player.Init();
 
@@ -148,6 +172,8 @@ public partial class GameManager
       owner._resultCanvas.gameObject.SetActive(true);
 
       //仮スクリプト
+      owner.StartCoroutine(owner.TimelinePlay(owner._resultInit));
+
       owner._player.gameObject.SetActive(false);
     }
 
